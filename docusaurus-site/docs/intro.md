@@ -12,9 +12,10 @@ Objetivo:
 - reforcar boas praticas de seguranca em cada exercicio.
 
 Como usar:
-1. Ler os objetivos da ficha.
-2. Executar o exercicio no teu ambiente.
-3. Comparar com a resolucao comentada.
-4. Rever erros comuns e mini desafio.
+1. Rever [Fundamentos C#](/docs/fundamentos-csharp).
+2. Ler os objetivos da ficha.
+3. Executar o exercicio no teu ambiente.
+4. Comparar com a resolucao comentada.
+5. Rever erros comuns e mini desafio.
 
 Vai para `Fichas Praticas` no menu lateral para comecar.

@@ -4,6 +4,7 @@ const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     'intro',
     'metodologia',
+    'fundamentos-csharp',
     {
       type: 'category',
       label: 'Fichas Praticas',

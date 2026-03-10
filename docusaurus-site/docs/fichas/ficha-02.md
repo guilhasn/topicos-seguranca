@@ -107,6 +107,52 @@ while (true)
 }
 ```
 
+## Mapa de conceitos C# desta ficha
+
+### Classe: `TcpClient` (cliente)
+- O que e: representa a ligacao TCP do lado do cliente.
+- Metodos principais:
+- `Connect(endPoint)`: liga ao servidor.
+- `GetStream()`: obtem `NetworkStream` para enviar/receber dados.
+- `Close()`: fecha a ligacao.
+- Propriedade util:
+- `ReceiveBufferSize`: tamanho do buffer de rececao.
+
+### Classe: `TcpListener` (servidor)
+- O que e: coloca o servidor a escuta numa porta.
+- Metodos principais:
+- `Start()`: inicia escuta.
+- `AcceptTcpClient()`: aceita uma nova ligacao.
+- `Stop()`: para escuta.
+
+### Classe: `NetworkStream`
+- O que e: canal de bytes entre cliente e servidor.
+- Metodos principais:
+- `Read(buffer, offset, count)`: recebe bytes da rede.
+- `Write(buffer, offset, count)`: envia bytes para a rede.
+- `Close()`: fecha stream.
+
+### Classe: `IPEndPoint`
+- O que e: combinacao de IP + porto.
+- Exemplo: `new IPEndPoint(IPAddress.Loopback, 50001)`.
+
+### Classe: `Encoding.UTF8`
+- O que e: converte texto <-> bytes.
+- Metodos usados:
+- `GetBytes(texto)`: string para bytes.
+- `GetString(bytes, 0, n)`: bytes para string.
+
+### Funcao/metodo: `EnviarDados(...)`
+- Tipo: metodo que devolve `string`.
+- Parametros: mensagem, IP e porto.
+- Responsabilidade: abrir ligacao, enviar mensagem, ler resposta e devolver texto.
+
+### Outras funcoes (metodos com retorno) importantes
+- `IPAddress.Parse(ipAddress)` devolve um `IPAddress`.
+- `int.Parse(ipPort)` devolve um `int`.
+- `networkStream.Read(...)` devolve `int` (bytes lidos).
+- `Encoding.UTF8.GetString(...)` devolve `string`.
+
 ## O que cada servidor deve fazer (sem solucao detalhada)
 
 1. `Server1`:

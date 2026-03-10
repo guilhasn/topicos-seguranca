@@ -75,6 +75,46 @@ private void buttonCopyFile_Click(object sender, EventArgs e)
 }
 ```
 
+## Mapa de conceitos C# desta ficha
+
+### Classe: `FileStream`
+- O que e: classe para ler e escrever ficheiros em modo stream (bytes).
+- Usada para: copiar `security.jpg` para `copy_security.jpg`.
+- Metodos principais:
+- `Read(buffer, offset, count)`: le bytes do ficheiro para memoria.
+- `Write(buffer, offset, count)`: escreve bytes da memoria para ficheiro.
+- Propriedade importante:
+- `Length`: tamanho total do ficheiro em bytes.
+
+### Classe: `File`
+- O que e: classe estatica com operacoes rapidas sobre ficheiros.
+- Metodos usados:
+- `Exists(path)`: verifica se o ficheiro existe.
+- `Delete(path)`: apaga ficheiro existente.
+
+### Classe: `Path`
+- O que e: ajuda a construir caminhos de ficheiros de forma segura.
+- Metodo usado:
+- `Combine(parte1, parte2)`: junta partes do caminho sem erros de separador.
+
+### Classe: `Application`
+- Propriedade usada:
+- `Application.StartupPath`: pasta onde esta o executavel da aplicacao.
+
+### Funcoes (metodos com retorno) que deves reconhecer
+- `File.Exists(path)` devolve `bool` (existe ou nao existe).
+- `Path.Combine(...)` devolve `string` (caminho final).
+- `Read(...)` devolve `int` (quantos bytes foram lidos).
+
+### Classe: `StreamWriter` (extra log)
+- O que e: escreve texto em ficheiros.
+- Metodo usado:
+- `WriteLine(texto)`: escreve uma linha no `log.txt`.
+
+### Conceito importante: `using (...)`
+- O que faz: fecha e liberta recursos automaticamente no fim do bloco.
+- Porque e importante: evita ficheiros bloqueados e fugas de recursos.
+
 ## Explicacao linha a linha
 
 1. `bufferSize = 20480`: define o tamanho maximo de cada bloco lido.
