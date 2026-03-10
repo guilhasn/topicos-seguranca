@@ -137,7 +137,7 @@ while (true)
 - Exemplo: `new IPEndPoint(IPAddress.Loopback, 50001)`.
 
 ### Classe: `Encoding.UTF8`
-- O que e: converte texto <-> bytes.
+- O que e: converte texto para bytes e bytes para texto.
 - Metodos usados:
 - `GetBytes(texto)`: string para bytes.
 - `GetString(bytes, 0, n)`: bytes para string.
