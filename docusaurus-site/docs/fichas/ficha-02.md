@@ -10,18 +10,6 @@ sidebar_position: 2
 
 - [Enunciado PDF](/fichas/ficha-02/TS-FichaPratica02.pdf)
 
-## Nota sobre o guiao e solucao
-
-Nesta fase, o guiao detalhado e a solucao completa nao sao publicados no site publico.
-
-Motivo:
-- em GitHub Pages, qualquer "password" em JavaScript pode ser descoberta no codigo da pagina;
-- logo, nao e um bloqueio real.
-
-Recomendacao pratica:
-- manter a solucao fora do repositorio publico;
-- disponibilizar depois por um canal privado (Moodle, Teams, Drive institucional) ou por ficheiro ZIP encriptado com password.
-
 ## Objetivos
 
 - Criar arquitetura Cliente/Servidor com TCP.
