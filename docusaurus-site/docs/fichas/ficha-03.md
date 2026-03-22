@@ -24,6 +24,14 @@ sidebar_position: 3
 - O servidor mostra no terminal o que cada cliente envia.
 - No fim da comunicacao, o cliente envia `EOT` e o servidor responde `ACK`.
 
+## Glossario rapido (12.o ano)
+
+- `Tipadas`: mensagens com um "tipo" identificado (`DATA`, `ACK`, `EOT`).
+- `Concorrencia`: varias tarefas a correr ao mesmo tempo.
+- `Handler`: bloco/classe que trata um cliente especifico.
+- `Thread`: linha de execucao paralela dentro do programa.
+- `ACK`: confirmacao de que a mensagem foi recebida.
+
 ## Conceitos essenciais de Threads (explicacao simples)
 
 ### Processo vs Thread
@@ -45,12 +53,11 @@ Com uma thread por cliente:
 
 ### Modelo mental rapido
 
-- Thread principal do servidor:
-- aceita clientes (`AcceptTcpClient`).
-- Para cada cliente novo:
-- cria `ClientHandler`.
-- `ClientHandler` arranca uma `Thread`.
-- Essa thread trata apenas aquele cliente.
+1. A thread principal aceita clientes (`AcceptTcpClient`).
+2. Para cada cliente novo, cria um `ClientHandler`.
+3. O `ClientHandler` arranca uma `Thread`.
+4. Essa thread trata apenas aquele cliente.
+5. A thread principal continua livre para aceitar mais clientes.
 
 ## Codigo de referencia (esqueleto didatico)
 
@@ -91,11 +98,14 @@ class ClientHandler
         NetworkStream stream = client.GetStream();
         ProtocolSI protocolSI = new ProtocolSI();
 
-        while (protocolSI.GetCmdType() != ProtocolSICmdType.EOT)
+        while (true)
         {
             int bytesRead = stream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+            if (bytesRead <= 0) break;
 
-            switch (protocolSI.GetCmdType())
+            ProtocolSICmdType cmd = protocolSI.GetCmdType();
+
+            switch (cmd)
             {
                 case ProtocolSICmdType.DATA:
                     string msg = protocolSI.GetStringFromData();
@@ -107,7 +117,9 @@ class ClientHandler
                 case ProtocolSICmdType.EOT:
                     byte[] ackEot = protocolSI.Make(ProtocolSICmdType.ACK);
                     stream.Write(ackEot, 0, ackEot.Length);
-                    break;
+                    stream.Close();
+                    client.Close();
+                    return;
             }
         }
 
@@ -124,10 +136,13 @@ ProtocolSI protocolSI = new ProtocolSI();
 byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, msg);
 networkStream.Write(packet, 0, packet.Length);
 
-while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
+ProtocolSICmdType cmd = ProtocolSICmdType.EOT;
+do
 {
-    networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-}
+    int bytesRead = networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+    if (bytesRead <= 0) break;
+    cmd = protocolSI.GetCmdType();
+} while (cmd != ProtocolSICmdType.ACK);
 ```
 
 ## Mapa de conceitos C# desta ficha
